@@ -27,6 +27,7 @@ function runTwitter() {
 		 	//console.log("Tweeted at: " + moment(tweets[i].created_at, 'dd MM Do hh:mm:ss YYYY').format('MMMM Do YYYY, h:mm a'));		 	
 		}
 	});
+	appendFile(param1, param2);
 }
 
 function runSpotify(searchTerm){
@@ -46,6 +47,7 @@ function runSpotify(searchTerm){
 		console.log("Spotify Link: " + data.tracks.items[0].external_urls.spotify);
 		console.log("-------------------------");
 	});
+	appendFile(param1, param2);
 }
 
 //run OMDB API
@@ -68,6 +70,7 @@ function runOMDB(searchTerm){
 			console.log("-------------------------");
 		}
 	});	
+	appendFile(param1, param2);
 }
 
 //createMovieQuery will convert spaces in movie title to '+' for the OMDB search query
@@ -93,8 +96,22 @@ function runRandom() {
 	});
 }
 
-function whatCommand(a, b){
+function appendFile(a, b) {
+	var combinedArr = b.join(' ');
+	var combined = a + " " + combinedArr + ", ";
+	var fs = require('fs');
 
+	fs.appendFile('log.txt', combined, function(err){
+		if (err){
+			console.log("Error found: " + err);
+		} else {
+			console.log("content added to log.txt");
+		}
+	});
+}
+
+function whatCommand(a, b){
+	//create function to see what we do?
 }
 
 if (param1 === "my-tweets"){
