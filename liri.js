@@ -77,7 +77,24 @@ function createMovieQuery(string){
 }
 
 function runRandom() {
-	
+	var fs = require('fs');
+	fs.readFile("random.txt", "utf8", function(err, data) {
+		if (err){
+			console.log("Error found: " + err);
+		}
+		var dataArr = data.split(',');
+		if (dataArr[0] === "my-tweets"){
+			runTwitter();
+		} else if (dataArr[0] === "spotify-this-song"){
+			runSpotify(dataArr[1]);
+		} else if (dataArr[0] === "movie-this"){
+			runOMDB(dataArr[1]);
+		}
+	});
+}
+
+function whatCommand(a, b){
+
 }
 
 if (param1 === "my-tweets"){
@@ -95,7 +112,7 @@ if (param1 === "movie-this" && param2.length == 0){
 	runOMDB(param2);
 }
 if (param1 === "do-what-it-says"){
-	//take text from random.txt
+	runRandom();
 }
 
 
