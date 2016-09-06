@@ -49,7 +49,7 @@ function runSpotify(searchTerm){
 function runOMDB(searchTerm){
 	var request = require('request');
 
-	request('http://www.omdbapi.com/?t=' + searchTerm + '&y=&plot=short&r=json', function (err, response, body){
+	request('http://www.omdbapi.com/?t=' + searchTerm + '&y=&plot=short&tomatoes=true&r=json', function (err, response, body){
 		if (!err && response.statusCode == 200) {
 			//console.log(JSON.stringify(body, null, 2));
 			console.log("-------------------------");
@@ -60,6 +60,8 @@ function runOMDB(searchTerm){
 			console.log("Language: " + JSON.parse(body)["Language"]);
 			console.log("Plot: " + JSON.parse(body)["Plot"]);
 			console.log("Starring: " + JSON.parse(body)["Actors"]);
+			console.log("Rotten Tomato Rating: " + JSON.parse(body)["tomatoRating"]);
+			console.log("Rotten Tomato Rating: " + JSON.parse(body)["tomatoURL"]);
 			console.log("-------------------------");
 		}
 	});	
@@ -134,8 +136,3 @@ switch (param1) {
 		runRandom();
 		break;
 }
-
-
-
-
-
